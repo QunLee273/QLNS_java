@@ -22,6 +22,7 @@ public class dkForm extends javax.swing.JFrame {
      */
     public dkForm() {
         initComponents();
+        
     }
 
     /**
@@ -47,6 +48,8 @@ public class dkForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +96,29 @@ public class dkForm extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Xóa");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                { new Float(1.0), "admin", "admin123", "admin@admin.com"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Tài khoản", "Mật khẩu", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,9 +152,15 @@ public class dkForm extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(98, 98, 98))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(98, 98, 98))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,17 +191,16 @@ public class dkForm extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGap(277, 277, 277)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-    String user = "EAUT_QuanLe";
-    String pass = "quan2732k3";
 
     private void btnDkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDkActionPerformed
         int dk = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn thêm tài khoản không!", "Confirm", JOptionPane.YES_NO_OPTION);
@@ -177,9 +208,9 @@ public class dkForm extends javax.swing.JFrame {
             return;
         }
 
+        ConnectDB cn = new ConnectDB();
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection con = DriverManager.getConnection(url, user, pass);
+            Connection con = cn.getConnection();
             String sql = "Insert Into TaiKhoan values (?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -252,6 +283,8 @@ public class dkForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPasswordField txtCMK;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtMK;

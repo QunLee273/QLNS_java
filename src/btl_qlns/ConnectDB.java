@@ -18,7 +18,9 @@ public class ConnectDB {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTK";
-            conn = DriverManager.getConnection(url);
+            String user = "sa";
+            String pass = "sa";
+            conn = DriverManager.getConnection(url, user, pass);
 
             if(conn != null){
                 System.out.println("Kết nối CSDL SQL Server thành công!");

@@ -4,22 +4,20 @@
  */
 package btl_qlns;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  *
  * @author ACER
  */
 public class ConnectDB {
-    public Connection getConnection() throws ClassNotFoundException {
+    public Connection getConnection() {
         Connection conn = null;
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTK";
-            String user = "sa";
-            String pass = "sa";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/QLNS";
+            String user = "root";
+            String pass = "mysql";
             conn = DriverManager.getConnection(url, user, pass);
 
             if(conn != null){

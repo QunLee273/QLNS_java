@@ -19,9 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class dnForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dnForm
-     */
+    ConnectDB cn = new ConnectDB();
+    Connection conn = null;
     public dnForm() {
         initComponents();
     }
@@ -41,7 +40,6 @@ public class dnForm extends javax.swing.JFrame {
         txtTK = new javax.swing.JTextField();
         txtMK = new javax.swing.JPasswordField();
         btnDn = new javax.swing.JButton();
-        cbNhoDn = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,9 +65,6 @@ public class dnForm extends javax.swing.JFrame {
             }
         });
 
-        cbNhoDn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cbNhoDn.setText("Nhớ đăng nhập");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,9 +84,9 @@ public class dnForm extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtTK, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                 .addComponent(txtMK))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnDn)
-                                .addComponent(cbNhoDn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnDn)))
                         .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
@@ -107,9 +102,7 @@ public class dnForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(cbNhoDn)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(btnDn)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -140,19 +133,20 @@ public class dnForm extends javax.swing.JFrame {
             return;
         }
 
-        ConnectDB cn = new ConnectDB();
-        Connection conn = null;
+        
         try {
             try {
                 conn = cn.getConnection();
-            } catch (ClassNotFoundException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(dnForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "SELECT * FROM TaiKhoan WHERE username = '" + user + "' AND password = '" + pass + "'";
+            String sql = "SELECT * FROM TAIKHOAN WHERE TaiKhoan = '" + user + "' AND MatKhau = '" + pass + "'";
             PreparedStatement pst = conn.prepareCall(sql);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 System.out.println(" Đăng nhập thành công!");
+                dnForm.this.setVisible(false);
+                new TrangChu().setVisible(true);
             } else {
                 System.out.println("Sai tài khoản hoặc mật khẩu!!");
             }
@@ -198,7 +192,6 @@ public class dnForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDn;
-    private javax.swing.JCheckBox cbNhoDn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

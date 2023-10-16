@@ -4,12 +4,11 @@
  */
 package btl_qlns;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.concurrent.locks.Condition;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class dkForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dkForm
-     */
+    ConnectDB cn = new ConnectDB();
     public dkForm() {
         initComponents();
-        
+        populateTable();
     }
 
     /**
@@ -36,20 +33,20 @@ public class dkForm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtTK = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
         txtMK = new javax.swing.JPasswordField();
         txtCMK = new javax.swing.JPasswordField();
-        btnQl = new javax.swing.JButton();
+        btnQuayLai = new javax.swing.JButton();
         btnDk = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbTK = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        txtMaNV = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,9 +56,6 @@ public class dkForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Tài khoản");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("Email");
-
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Mật khẩu");
 
@@ -70,14 +64,17 @@ public class dkForm extends javax.swing.JFrame {
 
         txtTK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         txtMK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtCMK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btnQl.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnQl.setText("Quay lại");
+        btnQuayLai.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnQuayLai.setText("Quay lại");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
 
         btnDk.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnDk.setText("Thêm");
@@ -90,152 +87,348 @@ public class dkForm extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Thông tin tài khoản nhân viên");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Sửa");
+        btnSua.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Xóa");
+        btnXoa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbTK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Float(1.0), "admin", "admin123", "admin@admin.com"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Tài khoản", "Mật khẩu", "Email"
+                "MaNV", "Tài khoản", "Mật khẩu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tbTK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTKMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbTK);
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel7.setText("MaNV");
+
+        txtMaNV.setPreferredSize(new java.awt.Dimension(68, 27));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnQl)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDk)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtMK, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(txtCMK)
-                                .addComponent(txtTK)
-                                .addComponent(txtEmail))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCMK, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMK, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTK)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnQuayLai)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDk)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXoa)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(98, 98, 98))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDk)
-                    .addComponent(jButton1)
-                    .addComponent(btnQl)
-                    .addComponent(jButton2))
+                    .addComponent(btnSua)
+                    .addComponent(btnQuayLai)
+                    .addComponent(btnXoa))
                 .addGap(18, 18, 18))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateTable() {
+        // Xóa dữ liệu hiện có trong bảng
+        DefaultTableModel model = (DefaultTableModel) tbTK.getModel();
+        model.setRowCount(0);
+
+        // Thực hiện truy vấn lấy dữ liệu từ cơ sở dữ liệu
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Thiết lập kết nối
+            conn = cn.getConnection();
+            stmt = conn.createStatement();
+
+            // Thực hiện truy vấn SELECT để lấy dữ liệu từ bảng NHANVIEN
+            String query = "SELECT * FROM TAIKHOAN";
+            rs = stmt.executeQuery(query);
+
+            // Đổ dữ liệu từ ResultSet vào bảng
+            while (rs.next()) {
+                String maNV = rs.getString("MaNV");
+                String taiKhoan = rs.getString("TAIKHOAN");
+                String matKhau = rs.getString("MATKHAU");
+
+                // Thêm dữ liệu vào bảng
+                model.addRow(new Object[]{maNV, taiKhoan, matKhau}); 
+            }
+
+            // Đóng ResultSet, câu lệnh và kết nối
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi lấy dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void displayDataFromTable(int row) {
+        // Lấy dữ liệu từ bảng theo hàng được chọn
+        String maNV = tbTK.getValueAt(row, 0).toString();
+        String taiKhoan = tbTK.getValueAt(row, 1).toString();
+        String matKhau = tbTK.getValueAt(row, 2).toString();
+        
+
+        // Hiển thị dữ liệu lên các ô nhập liệu
+        txtMaNV.setText(maNV);
+        txtTK.setText(taiKhoan);
+        txtMK.setText(matKhau);
+        txtCMK.setText(matKhau);
+    }
+     
 
     private void btnDkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDkActionPerformed
-        int dk = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn thêm tài khoản không!", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (dk != JOptionPane.YES_OPTION){
+        // Lấy dữ liệu từ các thành phần trên form
+        String maNV = txtMaNV.getText();
+        String taiKhoan = txtTK.getText();
+        String matKhau = new String(txtMK.getPassword());
+
+        // Thực hiện chèn dữ liệu vào cơ sở dữ liệu
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            // Thiết lập kết nối
+            conn = cn.getConnection();
+            stmt = conn.createStatement();
+
+            // Tạo câu truy vấn chèn dữ liệu
+            String query = "INSERT INTO TAIKHOAN (MaNV, TaiKhoan, MatKhau) "
+                    + "VALUES ('" + maNV + "', '" + taiKhoan + "', '" + matKhau + "')";
+
+            // Thực hiện câu truy vấn chèn dữ liệu
+            stmt.executeUpdate(query);
+
+            // Đóng câu lệnh và kết nối
+            stmt.close();
+            conn.close();
+
+            // Hiển thị thông báo thành công
+            JOptionPane.showMessageDialog(this, "Thêm dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+            txtMaNV.setText("");
+            txtTK.setText("");
+            txtMK.setText("");
+            txtCMK.setText("");
+            
+            // Tải lại dữ liệu và hiển thị trong bảng
+            populateTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDkActionPerformed
+
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn thoát không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        dkForm.this.setVisible(false);
+        new TrangChu().setVisible(true);
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // Lấy chỉ mục hàng được chọn trong bảng
+        int selectedRow = tbTK.getSelectedRow();
+
+        // Kiểm tra xem có hàng nào được chọn không
+        if (selectedRow == -1) {
+            // Hiển thị thông báo lỗi nếu không có hàng nào được chọn
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        ConnectDB cn = new ConnectDB();
+        // Lấy dữ liệu từ các thành phần trên form để sửa
+        String maNV = txtMaNV.getText();
+        String taiKhoan = txtTK.getText();
+        String matKhau = new String(txtMK.getPassword());
+
+        // Thực hiện cập nhật dữ liệu vào cơ sở dữ liệu
+        Connection conn = null;
+        Statement stmt = null;
+
         try {
-            Connection con = cn.getConnection();
-            String sql = "Insert Into TaiKhoan values (?,?,?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+            // Thiết lập kết nối
+            conn = cn.getConnection();
+            stmt = conn.createStatement();
+
+            // Tạo câu truy vấn cập nhật dữ liệu
+            String query = "UPDATE TAIKHOAN SET TaiKhoan = '" + taiKhoan + "', MatKhau = '" + matKhau +
+                "' WHERE MaNV = '" + maNV + "'";
+
+            // Thực hiện câu truy vấn cập nhật dữ liệu
+            stmt.executeUpdate(query);
+
+            // Đóng câu lệnh và kết nối
+            stmt.close();
+            conn.close();
+
+            // Hiển thị thông báo thành công
+            JOptionPane.showMessageDialog(this, "Sửa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             
-            ps.setString(1, txtEmail.getText());
-            ps.setString(2, txtTK.getText());
-            ps.setString(3, txtMK.getText());
-
-            int n = ps.executeUpdate();
-
-            if (txtTK.getText().equals("") | txtEmail.getText().equals("") | 
-                txtMK.getText().equals("") | txtCMK.getText().equals("")){
-                
-                JOptionPane.showMessageDialog(this,"Không để trống thông tin!");
-            } else if (txtMK.getText() != txtCMK.getText()) {
-                    JOptionPane.showMessageDialog(this,"Mật khẩu không trùng khớp!");
-            } else if (n != 0){
-                JOptionPane.showMessageDialog(this,"Thêm thành công!");
-            } else {
-                JOptionPane.showMessageDialog(this,"Thêm thất bại!");
-            }
-
-        } catch (Exception e) {
+            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+            txtMaNV.setText("");
+            txtTK.setText("");
+            txtMK.setText("");
+            txtCMK.setText("");
+            
+            // Tải lại dữ liệu và hiển thị trong bảng
+            populateTable();
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnDkActionPerformed
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        int selectedRow = tbTK.getSelectedRow();
+
+        // Kiểm tra xem có hàng nào được chọn không
+        if (selectedRow == -1) {
+            // Hiển thị thông báo lỗi nếu không có hàng nào được chọn
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lấy dữ liệu từ các thành phần trên form để xóa
+        String maNV = txtMaNV.getText();
+
+        // Thực hiện cập nhật dữ liệu vào cơ sở dữ liệu
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            // Thiết lập kết nối
+            conn = cn.getConnection();
+            stmt = conn.createStatement();
+
+            // Tạo câu truy vấn cập nhật dữ liệu
+            String query = "DELETE FROM TAIKHOAN WHERE MaNV = '" + maNV + "'";
+
+            // Thực hiện câu truy vấn cập nhật dữ liệu
+            stmt.executeUpdate(query);
+
+            // Đóng câu lệnh và kết nối
+            stmt.close();
+            conn.close();
+
+            // Hiển thị thông báo thành công
+            JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+            txtMaNV.setText("");
+            txtTK.setText("");
+            txtMK.setText("");
+            txtCMK.setText("");
+            
+            // Tải lại dữ liệu và hiển thị trong bảng
+            populateTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tbTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTKMouseClicked
+        tbTK.setDefaultEditor(Object.class, null);
+        tbTK.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Lấy chỉ mục hàng được chọn
+                int selectedRow = tbTK.getSelectedRow();
+                
+                // Hiển thị dữ liệu từ hàng được chọn vào các ô nhập liệu
+                displayDataFromTable(selectedRow);
+            }
+        });
+    }//GEN-LAST:event_tbTKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -274,20 +467,20 @@ public class dkForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDk;
-    private javax.swing.JButton btnQl;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbTK;
     private javax.swing.JPasswordField txtCMK;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtMK;
+    private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtTK;
     // End of variables declaration//GEN-END:variables
 }

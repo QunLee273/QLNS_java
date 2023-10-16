@@ -4,16 +4,18 @@
  */
 package btl_qlns;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ACER
  */
-public class Main extends javax.swing.JFrame {
+public class TrangChu extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public Main() {
+    public TrangChu() {
         initComponents();
     }
 
@@ -30,6 +32,7 @@ public class Main extends javax.swing.JFrame {
         btnThongTin = new javax.swing.JButton();
         btnThemTK = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,10 +40,28 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Quản Lý Nhân Sự");
 
         btnThongTin.setText("Thông tin nhân sự");
+        btnThongTin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongTinActionPerformed(evt);
+            }
+        });
 
         btnThemTK.setText("Thêm tài khoản");
+        btnThemTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemTKActionPerformed(evt);
+            }
+        });
 
         btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel2.setText("POLYCO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,23 +82,56 @@ public class Main extends javax.swing.JFrame {
                         .addGap(146, 146, 146)
                         .addComponent(btnDangXuat)))
                 .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThongTin)
                     .addComponent(btnThemTK))
                 .addGap(46, 46, 46)
                 .addComponent(btnDangXuat)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý thông tin nhân viên không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        TrangChu.this.setVisible(false);
+        new ThongTinForm().setVisible(true);
+    }//GEN-LAST:event_btnThongTinActionPerformed
+
+    private void btnThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTKActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý tài khoản nhân viên không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        TrangChu.this.setVisible(false);
+        new dkForm().setVisible(true);
+    }//GEN-LAST:event_btnThemTKActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        TrangChu.this.setVisible(false);
+        new dnForm().setVisible(true);
+    }//GEN-LAST:event_btnDangXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,20 +150,21 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new TrangChu().setVisible(true);
             }
         });
     }
@@ -119,5 +174,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnThemTK;
     private javax.swing.JButton btnThongTin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

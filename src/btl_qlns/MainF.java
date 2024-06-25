@@ -33,6 +33,11 @@ public class MainF extends javax.swing.JFrame {
         btnNhanSu = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         btnTK = new javax.swing.JButton();
+        btnPB = new javax.swing.JButton();
+        btnHD = new javax.swing.JButton();
+        btnLuong = new javax.swing.JButton();
+        btnCong = new javax.swing.JButton();
+        btnNghi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,7 +48,7 @@ public class MainF extends javax.swing.JFrame {
         jLabel2.setText("Polyco");
 
         btnNhanSu.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnNhanSu.setText("Thông tin nhân sự");
+        btnNhanSu.setText("Quản lý nhân sự");
         btnNhanSu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhanSuActionPerformed(evt);
@@ -59,10 +64,50 @@ public class MainF extends javax.swing.JFrame {
         });
 
         btnTK.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnTK.setText("Thông tin tài khoản");
+        btnTK.setText("Quản lý tài khoản");
         btnTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTKActionPerformed(evt);
+            }
+        });
+
+        btnPB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnPB.setText("Quản lý phòng ban");
+        btnPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPBActionPerformed(evt);
+            }
+        });
+
+        btnHD.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnHD.setText("Quản lý hợp đồng");
+        btnHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHDActionPerformed(evt);
+            }
+        });
+
+        btnLuong.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnLuong.setText("Quản lý lương");
+        btnLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuongActionPerformed(evt);
+            }
+        });
+
+        btnCong.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnCong.setText("Quản lý công");
+        btnCong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCongActionPerformed(evt);
+            }
+        });
+
+        btnNghi.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnNghi.setText("Quản lý nghỉ phép");
+        btnNghi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNghiActionPerformed(evt);
             }
         });
 
@@ -71,36 +116,51 @@ public class MainF extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNhanSu)
+                            .addComponent(btnTK)
+                            .addComponent(btnPB))
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHD)
+                            .addComponent(btnLuong)
+                            .addComponent(btnCong))
+                        .addGap(94, 94, 94)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDangXuat)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(btnNhanSu)
-                        .addGap(118, 118, 118)
-                        .addComponent(btnTK)))
-                .addGap(67, 67, 67))
+                            .addComponent(btnNghi))))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNhanSu)
-                    .addComponent(btnTK))
-                .addGap(18, 18, 18)
-                .addComponent(btnDangXuat)
-                .addGap(30, 30, 30))
+                    .addComponent(btnHD)
+                    .addComponent(btnNghi))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnTK)
+                            .addComponent(btnLuong))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPB)
+                            .addComponent(btnCong)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnDangXuat)))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -132,6 +192,26 @@ public class MainF extends javax.swing.JFrame {
         MainF.this.setVisible(false);
         new dnForm().setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void btnPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPBActionPerformed
+
+    private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHDActionPerformed
+
+    private void btnLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLuongActionPerformed
+
+    private void btnCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCongActionPerformed
+
+    private void btnNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNghiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNghiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,8 +249,13 @@ public class MainF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCong;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnHD;
+    private javax.swing.JButton btnLuong;
+    private javax.swing.JButton btnNghi;
     private javax.swing.JButton btnNhanSu;
+    private javax.swing.JButton btnPB;
     private javax.swing.JButton btnTK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

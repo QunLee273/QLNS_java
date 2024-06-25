@@ -151,7 +151,7 @@ public class dnForm extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 String admin = rs.getString("MaNV");
-                if (admin.equals("000")){
+                if (admin == null){
                     JOptionPane.showMessageDialog(this, "Chào mừng quản trị viên!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     dnForm.this.setVisible(false);
                     new MainF().setVisible(true);

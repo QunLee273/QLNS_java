@@ -62,7 +62,7 @@ public class ThongTinForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("Thông tin nhân viên");
+        jLabel1.setText("Quản lý nhân sự");
 
         jLabel2.setText("MaNV:");
 

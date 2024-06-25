@@ -47,6 +47,9 @@ public class dkForm extends javax.swing.JFrame {
         tbTK = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         txtMaNV = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cbHienMK = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,11 +134,28 @@ public class dkForm extends javax.swing.JFrame {
 
         txtMaNV.setPreferredSize(new java.awt.Dimension(68, 27));
 
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("Tìm kiếm:");
+
+        cbHienMK.setFont(new java.awt.Font("Times New Roman", 2, 16)); // NOI18N
+        cbHienMK.setText("Hiện mật khẩu");
+        cbHienMK.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbHienMKItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -144,65 +164,78 @@ public class dkForm extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCMK, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMK, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTK)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnQuayLai)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDk)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSua)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXoa)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnDk)
+                                .addGap(25, 25, 25)
+                                .addComponent(btnSua)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnXoa))
+                            .addComponent(btnQuayLai)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(cbHienMK, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDk)
-                    .addComponent(btnSua)
-                    .addComponent(btnQuayLai)
-                    .addComponent(btnXoa))
-                .addGap(18, 18, 18))
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbHienMK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDk)
+                            .addComponent(btnSua)
+                            .addComponent(btnXoa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuayLai))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,15 +291,40 @@ public class dkForm extends javax.swing.JFrame {
         txtMaNV.setText(maNV);
         txtTK.setText(taiKhoan);
         txtMK.setText(matKhau);
-        txtCMK.setText(matKhau);
     }
      
+    private boolean KiemTraMk() {
+        // Lấy dữ liệu từ các thành phần trên form
+        String matKhau = new String(txtMK.getPassword());
+        String ConfMatKhau = new String(txtCMK.getPassword());
+
+        // Kiểm tra độ dài
+        if (matKhau.length() < 5) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải có độ dài tối thiểu là 5 ký tự!", "Thông báo!!!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra độ phức tạp
+        if (!matKhau.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).{5,}$")) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu phải chứa ít nhất một ký tự chữ hoa, một ký tự chữ thường, một chữ số và một ký tự đặc biệt!", "Thông báo!!!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra xem hai mật khẩu có khớp hay không
+        if (!matKhau.equals(ConfMatKhau)){
+            JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!", "Thông báo!!!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        // Mật khẩu hợp lệ
+        return true;
+    }
 
     private void btnDkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDkActionPerformed
         // Lấy dữ liệu từ các thành phần trên form
         String maNV = txtMaNV.getText();
         String taiKhoan = txtTK.getText();
-        String matKhau = new String(txtMK.getPassword());
+        String matKhau = new String(txtMK.getPassword()); 
 
         // Thực hiện chèn dữ liệu vào cơ sở dữ liệu
         Connection conn = null;
@@ -276,32 +334,50 @@ public class dkForm extends javax.swing.JFrame {
             // Thiết lập kết nối
             conn = cn.getConnection();
             stmt = conn.createStatement();
+            
+            ResultSet rs = stmt.executeQuery("SELECT MaNV FROM NHANViEN WHERE MaNV = '" + maNV + "';");
+            
+            if (rs.next()) {
+                // Mã nhân viên đã tồn tại
+                ResultSet rst = stmt.executeQuery("SELECT TaiKhoan FROM TAIKHOAN WHERE TaiKhoan = '" + taiKhoan + "';");
+                if(rst.next()) {
+                    // Tài khoản tồn tại
+                    JOptionPane.showMessageDialog(this, "Tài khoản đã tồn tại!", "Thông báo!!!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Tài khoản không tồn tại
+                    // Kiểm tra mật khẩu
+                    if (KiemTraMk()) {
+                        // Tạo câu truy vấn chèn dữ liệu
+                        String query = "INSERT INTO TAIKHOAN (MaNV, TaiKhoan, MatKhau) "
+                                + "VALUES ('" + maNV + "', '" + taiKhoan + "', '" + matKhau + "')";
 
-            // Tạo câu truy vấn chèn dữ liệu
-            String query = "INSERT INTO TAIKHOAN (MaNV, TaiKhoan, MatKhau) "
-                    + "VALUES ('" + maNV + "', '" + taiKhoan + "', '" + matKhau + "')";
+                        // Thực hiện câu truy vấn chèn dữ liệu
+                        stmt.executeUpdate(query);
 
-            // Thực hiện câu truy vấn chèn dữ liệu
-            stmt.executeUpdate(query);
-
+                        // Hiển thị thông báo thành công
+                        JOptionPane.showMessageDialog(this, "Đăng ký thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        
+                        // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+                        txtMaNV.setText("");
+                        txtTK.setText("");
+                        txtMK.setText("");
+                        txtCMK.setText("");
+                    }  
+                }
+            } else {
+                // Mã nhân viên không tồn tại
+                JOptionPane.showMessageDialog(this, "Nhân viên không tồn tại!", "Thông báo!!!", JOptionPane.ERROR_MESSAGE);
+            }
+            
             // Đóng câu lệnh và kết nối
             stmt.close();
             conn.close();
-
-            // Hiển thị thông báo thành công
-            JOptionPane.showMessageDialog(this, "Thêm dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            
-            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
-            txtMaNV.setText("");
-            txtTK.setText("");
-            txtMK.setText("");
-            txtCMK.setText("");
             
             // Tải lại dữ liệu và hiển thị trong bảng
             populateTable();
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Nhân viên đã có tài khoản!", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnDkActionPerformed
 
@@ -311,7 +387,7 @@ public class dkForm extends javax.swing.JFrame {
             return;
         }
         dkForm.this.setVisible(false);
-        new TrangChu().setVisible(true);
+        new MainF().setVisible(true);
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -339,25 +415,31 @@ public class dkForm extends javax.swing.JFrame {
             conn = cn.getConnection();
             stmt = conn.createStatement();
 
-            // Tạo câu truy vấn cập nhật dữ liệu
-            String query = "UPDATE TAIKHOAN SET TaiKhoan = '" + taiKhoan + "', MatKhau = '" + matKhau +
-                "' WHERE MaNV = '" + maNV + "'";
+            if (maNV.equals(tbTK.getValueAt(selectedRow, 0))) {
+                // MaNV không bị sửa
+                // Tạo câu truy vấn cập nhật dữ liệu
+                String query = "UPDATE TAIKHOAN SET TaiKhoan = '" + taiKhoan + "', MatKhau = '" + matKhau +
+                    "' WHERE MaNV = '" + maNV + "'";
 
-            // Thực hiện câu truy vấn cập nhật dữ liệu
-            stmt.executeUpdate(query);
+                // Thực hiện câu truy vấn cập nhật dữ liệu
+                stmt.executeUpdate(query);
 
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(this, "Sửa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+                txtMaNV.setText("");
+                txtTK.setText("");
+                txtMK.setText("");
+                txtCMK.setText("");
+            } else {
+                // MaNV bị sửa
+                JOptionPane.showMessageDialog(this, "Không thể sửa mã nhân viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+            
             // Đóng câu lệnh và kết nối
             stmt.close();
             conn.close();
-
-            // Hiển thị thông báo thành công
-            JOptionPane.showMessageDialog(this, "Sửa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            
-            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
-            txtMaNV.setText("");
-            txtTK.setText("");
-            txtMK.setText("");
-            txtCMK.setText("");
             
             // Tải lại dữ liệu và hiển thị trong bảng
             populateTable();
@@ -389,24 +471,28 @@ public class dkForm extends javax.swing.JFrame {
             conn = cn.getConnection();
             stmt = conn.createStatement();
 
-            // Tạo câu truy vấn cập nhật dữ liệu
-            String query = "DELETE FROM TAIKHOAN WHERE MaNV = '" + maNV + "'";
+            if (!"000".equals(maNV)) {
+                // Tạo câu truy vấn cập nhật dữ liệu
+                String query = "DELETE FROM TAIKHOAN WHERE MaNV = '" + maNV + "'";
 
-            // Thực hiện câu truy vấn cập nhật dữ liệu
-            stmt.executeUpdate(query);
+                // Thực hiện câu truy vấn cập nhật dữ liệu
+                stmt.executeUpdate(query);
 
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
+                txtMaNV.setText("");
+                txtTK.setText("");
+                txtMK.setText("");
+                txtCMK.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản quản trị viên!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+                
             // Đóng câu lệnh và kết nối
             stmt.close();
             conn.close();
-
-            // Hiển thị thông báo thành công
-            JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            
-            // Sau khi cập nhật thành công, xóa dữ liệu trong các ô nhập liệu
-            txtMaNV.setText("");
-            txtTK.setText("");
-            txtMK.setText("");
-            txtCMK.setText("");
             
             // Tải lại dữ liệu và hiển thị trong bảng
             populateTable();
@@ -429,6 +515,78 @@ public class dkForm extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_tbTKMouseClicked
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Kết nối đến cơ sở dữ liệu MySQL
+            conn = cn.getConnection();
+
+            // Nhập từ khóa tìm kiếm từ người dùng
+            String keyword = txtTimKiem.getText();
+
+            // Tạo một câu lệnh truy vấn SQL với điều kiện tìm kiếm
+            String query = "SELECT * FROM TAIKHOAN WHERE MaNV LIKE '%" + keyword + "%' OR TaiKhoan LIKE '%" + keyword + "%'" + " OR MatKhau LIKE '%" + keyword + "%'";
+
+            // Tạo một câu lệnh truy vấn SQL
+            stmt = conn.createStatement();
+
+            // Thực hiện truy vấn tìm kiếm trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            rs = stmt.executeQuery(query);
+
+            // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("MaNV");
+            model.addColumn("Tài Khoản");
+            model.addColumn("Mật Khẩu");
+
+            // Đọc dữ liệu từ ResultSet và thêm vào DefaultTableModel
+            while (rs.next()) {
+                String maNV = rs.getString("MaNV");
+                String taiKhoan = rs.getString("TaiKhoan");
+                String matKhau = rs.getString("MatKhau");
+
+                Object[] rowData = {maNV, taiKhoan, matKhau};
+                model.addRow(rowData);
+            }
+
+            // Hiển thị dữ liệu từ DefaultTableModel vào JTable
+            tbTK.setModel(model);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng ResultSet, Statement và Connection để giải phóng tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void cbHienMKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHienMKItemStateChanged
+        // Kiểm tra xem checkbox được tích hay không
+        if (cbHienMK.isSelected()) {
+            // Nếu checkbox được tích, thì hiển thị mật khẩu( giá trị \u0000 là giá trị ký tự trống)
+            txtMK.setEchoChar('\u0000');
+            txtCMK.setEchoChar('\u0000');
+        } else {
+            // Nếu checkbox không được tích, thì ẩn mật khẩu
+            txtMK.setEchoChar('*');
+            txtCMK.setEchoChar('*');
+        }
+    }//GEN-LAST:event_cbHienMKItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -470,8 +628,10 @@ public class dkForm extends javax.swing.JFrame {
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JCheckBox cbHienMK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -482,5 +642,6 @@ public class dkForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtMK;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtTK;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

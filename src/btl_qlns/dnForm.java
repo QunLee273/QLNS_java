@@ -40,6 +40,7 @@ public class dnForm extends javax.swing.JFrame {
         txtTK = new javax.swing.JTextField();
         txtMK = new javax.swing.JPasswordField();
         btnDn = new javax.swing.JButton();
+        cbHienMK = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,36 +66,39 @@ public class dnForm extends javax.swing.JFrame {
             }
         });
 
+        cbHienMK.setFont(new java.awt.Font("Times New Roman", 2, 16)); // NOI18N
+        cbHienMK.setText("Hiện mật khẩu");
+        cbHienMK.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbHienMKItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtTK, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                .addComponent(txtMK))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(btnDn)))
-                        .addGap(48, 48, 48))))
+                    .addComponent(btnDn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTK, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                        .addComponent(txtMK))
+                    .addComponent(cbHienMK, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,9 +106,11 @@ public class dnForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbHienMK)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDn)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         txtTK.getAccessibleContext().setAccessibleName("tf_TK");
@@ -144,16 +150,34 @@ public class dnForm extends javax.swing.JFrame {
             PreparedStatement pst = conn.prepareCall(sql);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                System.out.println(" Đăng nhập thành công!");
-                dnForm.this.setVisible(false);
-                new TrangChu().setVisible(true);
+                String admin = rs.getString("MaNV");
+                if (admin.equals("000")){
+                    JOptionPane.showMessageDialog(this, "Chào mừng quản trị viên!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    dnForm.this.setVisible(false);
+                    new MainF().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    dnForm.this.setVisible(false);
+                    new thongtinNV().setVisible(true);
+                }
             } else {
-                System.out.println("Sai tài khoản hoặc mật khẩu!!");
+                JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_btnDnActionPerformed
+
+    private void cbHienMKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHienMKItemStateChanged
+        // Kiểm tra xem checkbox được tích hay không
+        if (cbHienMK.isSelected()) {
+            // Nếu checkbox được tích, thì hiển thị mật khẩu( giá trị \u0000 là giá trị ký tự trống)
+            txtMK.setEchoChar('\u0000');
+        } else {
+            // Nếu checkbox không được tích, thì ẩn mật khẩu
+            txtMK.setEchoChar('*');
+        }
+    }//GEN-LAST:event_cbHienMKItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -192,6 +216,7 @@ public class dnForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDn;
+    private javax.swing.JCheckBox cbHienMK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

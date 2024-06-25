@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author ACER
  */
-public class TrangChu extends javax.swing.JFrame {
+public class MainF extends javax.swing.JFrame {
 
     /**
-     * Creates new form Main
+     * Creates new form MainF
      */
-    public TrangChu() {
+    public MainF() {
         initComponents();
     }
 
@@ -29,30 +29,28 @@ public class TrangChu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnThongTin = new javax.swing.JButton();
-        btnThemTK = new javax.swing.JButton();
-        btnDangXuat = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnNhanSu = new javax.swing.JButton();
+        btnDangXuat = new javax.swing.JButton();
+        btnTK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel1.setText("Quản Lý Nhân Sự");
+        jLabel1.setText("Quản lý nhân sự");
 
-        btnThongTin.setText("Thông tin nhân sự");
-        btnThongTin.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel2.setText("Polyco");
+
+        btnNhanSu.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnNhanSu.setText("Thông tin nhân sự");
+        btnNhanSu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThongTinActionPerformed(evt);
+                btnNhanSuActionPerformed(evt);
             }
         });
 
-        btnThemTK.setText("Thêm tài khoản");
-        btnThemTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemTKActionPerformed(evt);
-            }
-        });
-
+        btnDangXuat.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,76 +58,78 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel2.setText("POLYCO");
+        btnTK.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnTK.setText("Thông tin tài khoản");
+        btnTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnThongTin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThemTK)
-                .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(140, 140, 140)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(btnDangXuat)))
-                .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(119, 119, 119))
+                        .addGap(193, 193, 193)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDangXuat)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(btnNhanSu)
+                        .addGap(118, 118, 118)
+                        .addComponent(btnTK)))
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThongTin)
-                    .addComponent(btnThemTK))
-                .addGap(46, 46, 46)
+                    .addComponent(btnNhanSu)
+                    .addComponent(btnTK))
+                .addGap(18, 18, 18)
                 .addComponent(btnDangXuat)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
-        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý thông tin nhân viên không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+    private void btnNhanSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSuActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý thông tin nhân sự không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
         if (tb != JOptionPane.YES_OPTION){
             return;
         }
-        TrangChu.this.setVisible(false);
+        MainF.this.setVisible(false);
         new ThongTinForm().setVisible(true);
-    }//GEN-LAST:event_btnThongTinActionPerformed
+    }//GEN-LAST:event_btnNhanSuActionPerformed
 
-    private void btnThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTKActionPerformed
-        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý tài khoản nhân viên không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+    private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý tài khoản nhân sự không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
         if (tb != JOptionPane.YES_OPTION){
             return;
         }
-        TrangChu.this.setVisible(false);
+        MainF.this.setVisible(false);
         new dkForm().setVisible(true);
-    }//GEN-LAST:event_btnThemTKActionPerformed
+    }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        int tb = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        int tb = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn đăng xuất không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
         if (tb != JOptionPane.YES_OPTION){
             return;
         }
-        TrangChu.this.setVisible(false);
+        MainF.this.setVisible(false);
         new dnForm().setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
@@ -150,29 +150,28 @@ public class TrangChu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrangChu().setVisible(true);
+                new MainF().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
-    private javax.swing.JButton btnThemTK;
-    private javax.swing.JButton btnThongTin;
+    private javax.swing.JButton btnNhanSu;
+    private javax.swing.JButton btnTK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

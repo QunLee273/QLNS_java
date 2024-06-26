@@ -7,6 +7,10 @@ package btl_qlns;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -48,6 +52,8 @@ public class thongtinNV extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
         lb_htTen = new javax.swing.JLabel();
         cb_menu = new javax.swing.JComboBox<>();
+        btn_In = new javax.swing.JButton();
+        btn_out = new javax.swing.JButton();
 
         doiMK.setMinimumSize(new java.awt.Dimension(500, 400));
 
@@ -163,6 +169,20 @@ public class thongtinNV extends javax.swing.JFrame {
             }
         });
 
+        btn_In.setText("CheckIn");
+        btn_In.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InActionPerformed(evt);
+            }
+        });
+
+        btn_out.setText("CheckOut");
+        btn_out.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_outActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,16 +191,19 @@ public class thongtinNV extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cb_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143)
+                .addComponent(btn_In)
+                .addGap(42, 42, 42)
+                .addComponent(btn_out)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_htTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThoat)
+                    .addComponent(lb_htTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(btnThoat)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -190,10 +213,14 @@ public class thongtinNV extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(lb_htTen, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(btnThoat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(cb_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_In)
+                        .addComponent(btn_out)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -201,7 +228,7 @@ public class thongtinNV extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private static String manv = "nv01";
+    private static String manv = dnForm.getManv();
     
     private void showTen(){
         
@@ -250,7 +277,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -319,7 +346,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -386,7 +413,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -445,7 +472,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -510,7 +537,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -577,7 +604,7 @@ public class thongtinNV extends javax.swing.JFrame {
             // Tạo một câu lệnh truy vấn SQL
             stmt = conn.createStatement();
 
-            // Thực hiện truy vấn trong bảng NHANVIEN và lưu kết quả vào ResultSet
+            // Thực hiện truy vấn trong bảng và lưu kết quả vào ResultSet
             rs = stmt.executeQuery(query);
 
             // Tạo một DefaultTableModel để lưu dữ liệu từ ResultSet
@@ -600,10 +627,19 @@ public class thongtinNV extends javax.swing.JFrame {
                 Time vao = rs.getTime("GioVao");
                 Time ra = rs.getTime("GioRa");
                 
-                // Tính toán giờ làm việc
-                double gioLam = (ra.getTime() - vao.getTime()) / (1000.0 * 60 * 60) - 1;
+                double gioLam = 0.0;
+                String gioLamStr;
 
-                Object[] rowData = {macong, ngaycong, vao, ra, gioLam};
+                if (ra == null) {
+                    gioLamStr = "";
+                } else {
+                    // Tính toán giờ làm việc
+                    gioLam = (ra.getTime() - vao.getTime()) / (1000.0 * 60 * 60);
+                    gioLamStr = Double.toString(gioLam);
+                }
+                
+
+                Object[] rowData = {macong, ngaycong, vao, ra, gioLamStr};
                 model.addRow(rowData);
             }
 
@@ -775,6 +811,176 @@ public class thongtinNV extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_doimkActionPerformed
 
+    private void btn_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InActionPerformed
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Statement stmt1 = null;
+        ResultSet rs1 = null;
+        Statement stmt2 = null;
+
+        // Lấy ngày giờ hiện tại
+        LocalDateTime now = LocalDateTime.now();
+
+        // Tách riêng ngày và giờ
+        LocalDate ngay = now.toLocalDate();
+        LocalTime gio = now.toLocalTime();
+
+        // Định dạng ngày và giờ
+        DateTimeFormatter ngay_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter gio_format = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String val_ngay = ngay.format(ngay_format);
+        String val_gioVao = gio.format(gio_format);
+
+        try {
+            // Kết nối đến cơ sở dữ liệu MySQL
+            conn = cn.getConnection();
+
+            // Tạo một câu lệnh truy vấn SQL với điều kiện
+            String query = "SELECT COUNT(*) AS soluong FROM chamcong WHERE MaNV = '" + manv + "' AND Ngay = '" + val_ngay + "'";
+
+            // Tạo một câu lệnh truy vấn SQL
+            stmt = conn.createStatement();
+
+            // Thực hiện truy vấn trong bảng chamcong và lưu kết quả vào ResultSet
+            rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            int soLuong = rs.getInt("soluong");
+
+            if (soLuong != 0) {
+                // Hiển thị thông báo
+                JOptionPane.showMessageDialog(this, "Bạn đã check-in ngày hôm nay rồi!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            } else {
+                // Tạo một câu lệnh truy vấn SQL với điều kiện
+                String sql = "SELECT COUNT(*) FROM chamcong";
+
+                // Tạo một câu lệnh truy vấn SQL
+                stmt1 = conn.createStatement();
+
+                // Thực hiện truy vấn trong bảng chamcong và lưu kết quả vào ResultSet
+                rs1 = stmt1.executeQuery(sql);
+
+                rs1.next();
+
+                int so = rs1.getInt(1);
+
+                String mcc = "mcc" + (so + 1);
+
+                // Tạo câu truy vấn cập nhật dữ liệu
+                String UpdQuery = "INSERT INTO chamcong (MaChamCong, MaNV, Ngay, GioVao) "
+                        + "VALUES ('" + mcc + "', '" + manv + "', '" + val_ngay + "', '" + val_gioVao + "')";
+
+                // Khởi tạo stmt2
+                stmt2 = conn.createStatement();
+
+                // Thực hiện câu truy vấn cập nhật dữ liệu
+                stmt2.executeUpdate(UpdQuery);
+
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(this, "Check-In thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Hiển thị lại bảng
+                String chon = cb_menu.getSelectedItem().toString();
+                
+                if (chon == "Chấm công") tableCong();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng ResultSet, Statement và Connection để giải phóng tài nguyên
+            try {
+                if (rs != null) rs.close();
+                if (rs1 != null) rs1.close();
+                if (stmt != null) stmt.close();
+                if (stmt1 != null) stmt1.close();
+                if (stmt2 != null) stmt2.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btn_InActionPerformed
+
+    private void btn_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_outActionPerformed
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        // Lấy ngày giờ hiện tại
+        LocalDateTime now = LocalDateTime.now();
+
+        // Tách riêng ngày và giờ
+        LocalDate ngay = now.toLocalDate();
+        LocalTime gio = now.toLocalTime();
+
+        // Định dạng ngày và giờ
+        DateTimeFormatter ngay_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter gio_format = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String val_ngay = ngay.format(ngay_format);
+        String val_gioRa = gio.format(gio_format);
+
+        try {
+            // Kết nối đến cơ sở dữ liệu MySQL
+            conn = cn.getConnection();
+
+            // Tạo một câu lệnh truy vấn SQL với điều kiện
+            String query = "SELECT COUNT(*) AS soluong FROM chamcong WHERE MaNV = '" + manv + "' AND Ngay = '" + val_ngay + "' AND GioRa is Null";
+
+            // Tạo một câu lệnh truy vấn SQL
+            stmt = conn.createStatement();
+            
+            // Thực hiện truy vấn trong bảng chamcong và lưu kết quả vào ResultSet
+            rs = stmt.executeQuery(query);
+            
+            rs.next();
+            
+            int soLuong = rs.getInt("soluong");
+            
+            if (soLuong == 0) {
+                // Hiển thị thông báo
+                JOptionPane.showMessageDialog(this, "Bạn đã check-out ngày hôm nay rồi hoặc bạn chưa check-In!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            else {
+                // Tạo câu truy vấn cập nhật dữ liệu
+                String UpdQuery = "UPDATE chamcong " +
+                                "SET GioRa = '" + val_gioRa + "' " +
+                                "WHERE MaNV = '" + manv + "' AND Ngay = '" + val_ngay + "'";
+
+                // Thực hiện câu truy vấn cập nhật dữ liệu
+                stmt.execute(UpdQuery);
+                
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(this, "Check-out thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Hiển thị lại bảng
+                String chon = cb_menu.getSelectedItem().toString();
+                
+                if (chon == "Chấm công") tableCong();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng ResultSet, Statement và Connection để giải phóng tài nguyên
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btn_outActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -812,7 +1018,9 @@ public class thongtinNV extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btn_In;
     private javax.swing.JButton btn_doimk;
+    private javax.swing.JButton btn_out;
     private javax.swing.JButton btn_quaylai;
     private javax.swing.JComboBox<String> cb_menu;
     private javax.swing.JFrame doiMK;

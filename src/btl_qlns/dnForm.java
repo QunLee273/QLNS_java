@@ -120,6 +120,8 @@ public class dnForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
  
+    private static String manv;
+    
     private void btnDnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDnActionPerformed
         String user = txtTK.getText();
         String pass = String.valueOf(txtMK.getPassword());
@@ -150,12 +152,13 @@ public class dnForm extends javax.swing.JFrame {
             PreparedStatement pst = conn.prepareCall(sql);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                String admin = rs.getString("MaNV");
-                if (admin == null){
+                String dn = rs.getString("MaNV");
+                if (dn == null){
                     JOptionPane.showMessageDialog(this, "Chào mừng quản trị viên!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     dnForm.this.setVisible(false);
                     new MainF().setVisible(true);
                 } else {
+                    manv = dn;
                     JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     dnForm.this.setVisible(false);
                     new thongtinNV().setVisible(true);
@@ -168,6 +171,10 @@ public class dnForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDnActionPerformed
 
+    public static String getManv() {
+        return manv;
+    }
+    
     private void cbHienMKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbHienMKItemStateChanged
         // Kiểm tra xem checkbox được tích hay không
         if (cbHienMK.isSelected()) {

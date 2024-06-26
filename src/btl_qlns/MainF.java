@@ -194,11 +194,21 @@ public class MainF extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPBActionPerformed
-        // TODO add your handling code here:
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý phòng ban không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        MainF.this.setVisible(false);
+        new qlPB().setVisible(true);
     }//GEN-LAST:event_btnPBActionPerformed
 
     private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
-        // TODO add your handling code here:
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý hợp đồng không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        MainF.this.setVisible(false);
+        new qlHopDong().setVisible(true);
     }//GEN-LAST:event_btnHDActionPerformed
 
     private void btnLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuongActionPerformed

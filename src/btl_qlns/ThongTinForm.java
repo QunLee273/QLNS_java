@@ -348,6 +348,7 @@ public class ThongTinForm extends javax.swing.JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         
+        
         try {
             // Thiết lập kết nối
             conn = cn.getConnection();
@@ -458,6 +459,7 @@ public class ThongTinForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnThemActionPerformed
     
+
     private void populateTable() {
         // Xóa dữ liệu hiện có trong bảng
         DefaultTableModel model = (DefaultTableModel) tbThongTin.getModel();
@@ -495,11 +497,13 @@ public class ThongTinForm extends javax.swing.JFrame {
                 // Thêm dữ liệu vào bảng
                 model.addRow(new Object[]{maNV, hoTen, ngaySinh, gioiTinh, diaChi, sdt, email, tenPB});
             }
-
+            
+            
             // Đóng ResultSet, câu lệnh và kết nối
             rs.close();
             stmt.close();
             conn.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi khi lấy dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);

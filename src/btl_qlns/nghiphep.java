@@ -153,6 +153,8 @@ public class nghiphep extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         dsnghiphep = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        txt_timkiem = new javax.swing.JTextField();
+        btn_timkiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -308,6 +310,13 @@ public class nghiphep extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Nghỉ phép");
 
+        btn_timkiem.setText("Search");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -318,15 +327,22 @@ public class nghiphep extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(329, 329, 329)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_timkiem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timkiem))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -468,6 +484,79 @@ public class nghiphep extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btn_capnhatActionPerformed
 
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        String keyword = txt_timkiem.getText().trim();
+    
+    if (keyword.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    DefaultTableModel model = (DefaultTableModel) dsnghiphep.getModel();
+    model.setRowCount(0); // Xóa dữ liệu hiện tại trong bảng
+
+    java.sql.Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        conn = cn.getConnection();
+
+        String searchQuery = """
+            SELECT 
+                nv.MaNV AS `Mã nhân viên`, 
+                nv.HoTen AS `Họ tên`, 
+                pb.TenPB AS `Phòng ban`,
+                np.MaNghiPhep AS `Mã nghỉ phép`, 
+                np.LoaiNghiPhep AS `Loại nghỉ phép`, 
+                np.NgayBatDau AS `Ngày bắt đầu`, 
+                np.NgayKetThuc AS `Ngày kết thúc`, 
+                np.LyDo AS `Lý do`, 
+                np.TrangThai AS `Trạng thái`
+            FROM 
+                nhanvien nv
+            JOIN 
+                phongban pb ON nv.MaPB = pb.MaPB
+            JOIN 
+                nghiphep np ON nv.MaNV = np.MaNV
+            WHERE 
+                nv.MaNV LIKE ? OR nv.HoTen LIKE ? OR pb.TenPB LIKE ? OR np.MaNghiPhep LIKE ? OR np.LoaiNghiPhep LIKE ? OR np.LyDo LIKE ? OR np.TrangThai LIKE ?;
+        """;
+
+        pstmt = conn.prepareStatement(searchQuery);
+        String likeKeyword = "%" + keyword + "%";
+        for (int i = 1; i <= 7; i++) {
+            pstmt.setString(i, likeKeyword);
+        }
+
+        rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Object[] row = {
+                rs.getString("Mã nhân viên"),
+                rs.getString("Họ tên"),
+                rs.getString("Phòng ban"),
+                rs.getString("Mã nghỉ phép"),
+                rs.getString("Loại nghỉ phép"),
+                rs.getString("Ngày bắt đầu"),
+                rs.getString("Ngày kết thúc"),
+                rs.getString("Lý do"),
+                rs.getString("Trạng thái")
+            };
+            model.addRow(row);
+        }
+        
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm trong cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -506,6 +595,7 @@ public class nghiphep extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhat;
     private javax.swing.JButton btn_luu;
+    private javax.swing.JButton btn_timkiem;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JTable dsnghiphep;
     private javax.swing.JLabel jLabel1;
@@ -525,6 +615,7 @@ public class nghiphep extends javax.swing.JFrame {
     private javax.swing.JTextField txt_mnv;
     private javax.swing.JTextField txt_nbd;
     private javax.swing.JTextField txt_nkt;
+    private javax.swing.JTextField txt_timkiem;
     private javax.swing.JTextField txt_tt;
     // End of variables declaration//GEN-END:variables
 }

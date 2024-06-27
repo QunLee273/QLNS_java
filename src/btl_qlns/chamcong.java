@@ -137,8 +137,12 @@ public class chamcong extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         dschamcong = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        txt_timkiem = new javax.swing.JTextField();
+        btn_timkiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setText("Mã nhân viên");
 
@@ -238,7 +242,7 @@ public class chamcong extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_mcc, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,6 +275,8 @@ public class chamcong extends javax.swing.JFrame {
                 .addGap(156, 156, 156))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         dschamcong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -292,8 +298,7 @@ public class chamcong extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,28 +311,40 @@ public class chamcong extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Chấm công ");
 
+        btn_timkiem.setText("Search");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(450, 450, 450)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btn_timkiem)
+                .addGap(309, 309, 309))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timkiem))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -463,6 +480,65 @@ public class chamcong extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_dschamcongMouseClicked
 
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        String keyword = txt_timkiem.getText().trim();
+    if (keyword.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Xóa dữ liệu hiện có trong bảng
+    model.setRowCount(0);
+
+    // Thực hiện truy vấn lấy dữ liệu từ cơ sở dữ liệu
+    java.sql.Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        // Kết nối tới cơ sở dữ liệu
+        conn = cn.getConnection();
+
+        // Thực hiện truy vấn SQL
+        String query = """
+            SELECT cc.MaChamCong, nv.MaNV, nv.HoTen, pb.TenPB, cc.Ngay, cc.GioVao, cc.GioRa
+            FROM chamcong cc
+            JOIN nhanvien nv ON cc.MaNV = nv.MaNV
+            JOIN phongban pb ON nv.MaPB = pb.MaPB
+            WHERE nv.HoTen LIKE ? OR nv.MaNV LIKE ? OR pb.TenPB LIKE ? OR cc.MaChamCong LIKE ?
+            """;
+        pstmt = conn.prepareStatement(query);
+        String searchKeyword = "%" + keyword + "%";
+        pstmt.setString(1, searchKeyword);
+        pstmt.setString(2, searchKeyword);
+        pstmt.setString(3, searchKeyword);
+        pstmt.setString(4, searchKeyword);
+
+        rs = pstmt.executeQuery();
+
+        // Lặp qua kết quả truy vấn và thêm vào mô hình bảng
+        while (rs.next()) {
+            Object[] row = new Object[7];
+            row[0] = rs.getString("MaChamCong");
+            row[1] = rs.getString("MaNV");
+            row[2] = rs.getString("HoTen");
+            row[3] = rs.getString("TenPB");
+            row[4] = rs.getDate("Ngay");
+            row[5] = rs.getTime("GioVao");
+            row[6] = rs.getTime("GioRa");
+            model.addRow(row);
+        }
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -501,6 +577,7 @@ public class chamcong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhat;
     private javax.swing.JButton btn_luu;
+    private javax.swing.JButton btn_timkiem;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JTable dschamcong;
     private javax.swing.JLabel jLabel1;
@@ -516,6 +593,7 @@ public class chamcong extends javax.swing.JFrame {
     private javax.swing.JTextField txt_mnv;
     private javax.swing.JTextField txt_ngay;
     private javax.swing.JTextField txt_ra;
+    private javax.swing.JTextField txt_timkiem;
     private javax.swing.JTextField txt_vao;
     // End of variables declaration//GEN-END:variables
 }

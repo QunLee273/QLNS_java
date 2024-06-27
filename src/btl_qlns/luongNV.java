@@ -59,6 +59,9 @@ public class luongNV extends javax.swing.JFrame {
         String phuCap = dsluong.getValueAt(row, 5).toString();
         String thuong = dsluong.getValueAt(row, 6).toString();
         String khauTru = dsluong.getValueAt(row, 7).toString();
+        
+        
+        double tongLuong = Double.parseDouble(luongCoBan) + Double.parseDouble(phuCap) + Double.parseDouble(thuong) - Double.parseDouble(khauTru);
 
         // Hiển thị dữ liệu lên các ô nhập liệu
         txt_ml.setText(maLuong);
@@ -69,6 +72,8 @@ public class luongNV extends javax.swing.JFrame {
         txt_pc.setText(phuCap);
         txt_t.setText(thuong);
         txt_khautru.setText(khauTru);
+        
+        jTextField9.setText(String.valueOf(tongLuong));
 }
 
 
@@ -160,6 +165,8 @@ public class luongNV extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         dsluong = new javax.swing.JTable();
+        txt_timkiem = new javax.swing.JTextField();
+        btn_timkiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -262,7 +269,7 @@ public class luongNV extends javax.swing.JFrame {
                             .addComponent(txt_khautru)
                             .addComponent(txt_t)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                         .addGap(187, 187, 187))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -371,6 +378,19 @@ public class luongNV extends javax.swing.JFrame {
                 .addGap(0, 90, Short.MAX_VALUE))
         );
 
+        txt_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_timkiemActionPerformed(evt);
+            }
+        });
+
+        btn_timkiem.setText("Search");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -378,20 +398,27 @@ public class luongNV extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel1)
+                .addGap(205, 205, 205)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_timkiem)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -534,6 +561,54 @@ public class luongNV extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
+    private void txt_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_timkiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_timkiemActionPerformed
+
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        String tenNV = txt_timkiem.getText().trim();
+        if (tenNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhân viên để tìm kiếm!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) dsluong.getModel();
+        model.setRowCount(0);
+
+        try (Connection conn = cn.getConnection(); 
+             PreparedStatement pstmt = conn.prepareStatement("""
+                SELECT luong.*, phongban.TenPB, nhanvien.HoTen
+                FROM luong
+                LEFT JOIN nhanvien ON luong.MaNV = nhanvien.MaNV
+                LEFT JOIN phongban ON nhanvien.MaPB = phongban.MaPB
+                WHERE nhanvien.HoTen LIKE ?;
+            """)) {
+
+            pstmt.setString(1, "%" + tenNV + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Object[] row = new Object[9];
+                row[0] = rs.getString("MaLuong");
+                row[1] = rs.getString("MaNV");
+                row[2] = rs.getString("HoTen");
+                row[3] = rs.getString("TenPB");
+                row[4] = rs.getDouble("luongCoBan");
+                row[5] = rs.getDouble("PhuCap");
+                row[6] = rs.getDouble("Thuong");
+                row[7] = rs.getDouble("KhauTru");
+                row[8] = rs.getDouble("luongCoBan") + rs.getDouble("PhuCap") + rs.getDouble("Thuong") - rs.getDouble("KhauTru");
+                model.addRow(row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -572,6 +647,7 @@ public class luongNV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhat;
     private javax.swing.JButton btn_luu;
+    private javax.swing.JButton btn_timkiem;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JTable dsluong;
     private javax.swing.JLabel jLabel1;
@@ -598,5 +674,6 @@ public class luongNV extends javax.swing.JFrame {
     private javax.swing.JTextField txt_pc;
     private javax.swing.JTextField txt_t;
     private javax.swing.JTextField txt_ten;
+    private javax.swing.JTextField txt_timkiem;
     // End of variables declaration//GEN-END:variables
 }

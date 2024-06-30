@@ -228,7 +228,7 @@ public class thongtinNV extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private static String manv = dnForm.getManv();
+    private static final String manv = dnForm.getManv();
     
     private void showTen(){
         

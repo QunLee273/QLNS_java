@@ -4,10 +4,7 @@
  */
 package btl_qlns;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 62fc9ccd9bea344cc8ef4d454f315f06eedb426f
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,11 +59,7 @@ public class luongNV extends javax.swing.JFrame {
         // Gán model cho JTable dsluong
         dsluong.setModel(model);
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 62fc9ccd9bea344cc8ef4d454f315f06eedb426f
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Retrieve input values from text fields
         String maLuong = txt_ml.getText();
@@ -116,10 +109,7 @@ public class luongNV extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 62fc9ccd9bea344cc8ef4d454f315f06eedb426f
+
     private void displayDataFromTable(int row) {
         // Lấy dữ liệu từ bảng theo hàng được chọn
         String maLuong = dsluong.getValueAt(row, 0).toString();
@@ -144,10 +134,6 @@ public class luongNV extends javax.swing.JFrame {
         
         jTextField9.setText(String.valueOf(tongLuong));
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 62fc9ccd9bea344cc8ef4d454f315f06eedb426f
 
 
     private void loadData() {

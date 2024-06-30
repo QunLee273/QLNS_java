@@ -384,85 +384,85 @@ public class chamcong extends javax.swing.JFrame {
     private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
         // TODO add your handling code here:
         String machamcong = txt_mcc.getText();
-    String manv = txt_mnv.getText();
-    String ngay = txt_ngay.getText();
-    String vao = txt_vao.getText();
-    String ra = txt_ra.getText();
-    // Kiểm tra các trường dữ liệu
-        if (machamcong.isEmpty() || manv.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng xử lý nếu có trường trống
+        String manv = txt_mnv.getText();
+        String ngay = txt_ngay.getText();
+        String vao = txt_vao.getText();
+        String ra = txt_ra.getText();
+        // Kiểm tra các trường dữ liệu
+            if (machamcong.isEmpty() || manv.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return; // Dừng xử lý nếu có trường trống
+            }
+
+        String updateQuery = "UPDATE chamcong SET MaNV=?, Ngay=?, GioVao=?, GioRa=? WHERE MaChamCong=?";
+
+        try {
+            java.sql.Connection conn = cn.getConnection();
+
+            PreparedStatement pstmt = conn.prepareStatement(updateQuery);
+            pstmt.setString(1, manv);
+            pstmt.setString(2, ngay);
+            pstmt.setString(3, vao);
+            pstmt.setString(4, ra);
+            pstmt.setString(5, machamcong);
+
+            int updated = pstmt.executeUpdate();
+
+            if (updated > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                loadData(); // Tải lại dữ liệu sau khi cập nhật
+                clearInputFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu để cập nhật!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-    
-    String updateQuery = "UPDATE chamcong SET MaNV=?, Ngay=?, GioVao=?, GioRa=? WHERE MaChamCong=?";
-    
-    try {
-        java.sql.Connection conn = cn.getConnection();
-        
-        PreparedStatement pstmt = conn.prepareStatement(updateQuery);
-        pstmt.setString(1, manv);
-        pstmt.setString(2, ngay);
-        pstmt.setString(3, vao);
-        pstmt.setString(4, ra);
-        pstmt.setString(5, machamcong);
-        
-        int updated = pstmt.executeUpdate();
-        
-        if (updated > 0) {
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-            loadData(); // Tải lại dữ liệu sau khi cập nhật
-            clearInputFields();
-        } else {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu để cập nhật!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        }
-        
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btn_capnhatActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
 
-     String machamcong = txt_mcc.getText();
-     String maNV = txt_mnv.getText();
-     String ngay = txt_ngay.getText();
-     String vao = txt_vao.getText();
-     String ra = txt_ra.getText();
-     
-     // Kiểm tra các trường dữ liệu
-        if (machamcong.isEmpty() || maNV.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Dừng xử lý nếu có trường trống
+        String machamcong = txt_mcc.getText();
+        String maNV = txt_mnv.getText();
+        String ngay = txt_ngay.getText();
+        String vao = txt_vao.getText();
+        String ra = txt_ra.getText();
+
+        // Kiểm tra các trường dữ liệu
+           if (machamcong.isEmpty() || maNV.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
+               JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+               return; // Dừng xử lý nếu có trường trống
+           }
+
+
+        // Chuỗi câu truy vấn SQL
+        String insertQuery = "INSERT INTO `chamcong`(`MaChamCong`, `MaNV`, `Ngay`, `GioVao`, `GioRa`) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            java.sql.Connection conn = cn.getConnection(); // Thiết lập kết nối
+
+            if (!machamcong.isEmpty()) {  // Kiểm tra xem maLuong có rỗng hay không
+                // Thêm bản ghi mới
+                try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+                   pstmt.setString(1, machamcong); 
+                   pstmt.setString(2, maNV);
+                   pstmt.setString(3, ngay);
+                   pstmt.setString(4, vao);
+                   pstmt.setString(5, ra);
+                    pstmt.executeUpdate();
+                    System.out.println("Câu truy vấn thêm thực thi thành công!");
+                }
+            } 
+
+            // Tải lại dữ liệu sau khi cập nhật/thêm
+            loadData();
+            clearInputFields();
+            JOptionPane.showMessageDialog(this, "Lưu thành công!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-     
-
-     // Chuỗi câu truy vấn SQL
-     String insertQuery = "INSERT INTO `chamcong`(`MaChamCong`, `MaNV`, `Ngay`, `GioVao`, `GioRa`) VALUES (?, ?, ?, ?, ?)";
-
-     try {
-         java.sql.Connection conn = cn.getConnection(); // Thiết lập kết nối
-
-         if (!machamcong.isEmpty()) {  // Kiểm tra xem maLuong có rỗng hay không
-             // Thêm bản ghi mới
-             try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-                pstmt.setString(1, machamcong); 
-                pstmt.setString(2, maNV);
-                pstmt.setString(3, ngay);
-                pstmt.setString(4, vao);
-                pstmt.setString(5, ra);
-                 pstmt.executeUpdate();
-                 System.out.println("Câu truy vấn thêm thực thi thành công!");
-             }
-         } 
-
-         // Tải lại dữ liệu sau khi cập nhật/thêm
-         loadData();
-         clearInputFields();
-         JOptionPane.showMessageDialog(this, "Lưu thành công!");
-
-     } catch (SQLException e) {
-         JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-     }
     }//GEN-LAST:event_btn_luuActionPerformed
 
     private void txt_mccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mccActionPerformed

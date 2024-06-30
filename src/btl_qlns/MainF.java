@@ -212,15 +212,30 @@ public class MainF extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHDActionPerformed
 
     private void btnLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuongActionPerformed
-        // TODO add your handling code here:
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý lương không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        MainF.this.setVisible(false);
+        new luongNV().setVisible(true);
     }//GEN-LAST:event_btnLuongActionPerformed
 
     private void btnCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongActionPerformed
-        // TODO add your handling code here:
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý chấm công không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        MainF.this.setVisible(false);
+        new chamcong().setVisible(true);
     }//GEN-LAST:event_btnCongActionPerformed
 
     private void btnNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNghiActionPerformed
-        // TODO add your handling code here:
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn vào quản lý nghỉ phép không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        MainF.this.setVisible(false);
+        new nghiphep().setVisible(true);
     }//GEN-LAST:event_btnNghiActionPerformed
 
     /**

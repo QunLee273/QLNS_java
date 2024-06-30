@@ -149,6 +149,7 @@ public class nghiphep extends javax.swing.JFrame {
         btn_luu = new javax.swing.JButton();
         btn_capnhat = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dsnghiphep = new javax.swing.JTable();
@@ -195,6 +196,13 @@ public class nghiphep extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,7 +243,9 @@ public class nghiphep extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_tt, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_capnhat)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnThoat)
+                                    .addComponent(btn_capnhat))
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_xoa)))))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -276,6 +286,8 @@ public class nghiphep extends javax.swing.JFrame {
                     .addComponent(btn_luu)
                     .addComponent(btn_capnhat)
                     .addComponent(btn_xoa))
+                .addGap(40, 40, 40)
+                .addComponent(btnThoat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -557,6 +569,15 @@ public class nghiphep extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn thoát không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        nghiphep.this.setVisible(false);
+        new MainF().setVisible(true);
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -593,6 +614,7 @@ public class nghiphep extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btn_capnhat;
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_timkiem;

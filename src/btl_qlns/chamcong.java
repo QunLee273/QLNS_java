@@ -16,9 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class chamcong extends javax.swing.JFrame {
 
-    /**
-     * Creates new form chamcong
-     */
+    
     ConnectDB cn = new ConnectDB();
     DefaultTableModel model;
     
@@ -133,6 +131,7 @@ public class chamcong extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_mcc = new javax.swing.JTextField();
         btn_xoa = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dschamcong = new javax.swing.JTable();
@@ -205,6 +204,13 @@ public class chamcong extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -231,17 +237,20 @@ public class chamcong extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btn_luu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_capnhat)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_xoa))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_mcc, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_mcc, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btn_luu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnThoat)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_capnhat)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_xoa)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -272,7 +281,9 @@ public class chamcong extends javax.swing.JFrame {
                     .addComponent(btn_capnhat)
                     .addComponent(btn_luu)
                     .addComponent(btn_xoa))
-                .addGap(156, 156, 156))
+                .addGap(57, 57, 57)
+                .addComponent(btnThoat)
+                .addGap(76, 76, 76))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -539,6 +550,15 @@ public class chamcong extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int tb = JOptionPane.showConfirmDialog(this, "Chắc chắn muốn thoát không!", "Thông báo!!!", JOptionPane.YES_NO_OPTION);
+        if (tb != JOptionPane.YES_OPTION){
+            return;
+        }
+        chamcong.this.setVisible(false);
+        new MainF().setVisible(true);
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +595,7 @@ public class chamcong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btn_capnhat;
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_timkiem;

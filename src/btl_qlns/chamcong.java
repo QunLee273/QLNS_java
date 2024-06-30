@@ -20,14 +20,6 @@ public class chamcong extends javax.swing.JFrame {
     ConnectDB cn = new ConnectDB();
     DefaultTableModel model;
     
-    private void clearInputFields() {
-        txt_mcc.setText("");
-        txt_mnv.setText("");
-        txt_ngay.setText("");
-        txt_vao.setText("");
-        txt_ra.setText("");
-    }
-
     public chamcong() {
         initComponents();
         setupTable();

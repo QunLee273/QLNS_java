@@ -27,6 +27,15 @@ public class nghiphep extends javax.swing.JFrame {
         loadData();
         
     }
+    private void clearInputFields() {
+        txt_manp.setText("");
+        txt_mnv.setText("");
+        txt_lnp.setText("");
+        txt_nbd.setText("");
+        txt_nkt.setText("");
+        txt_ld.setText("");
+        txt_tt.setText("");
+    }
     private void setupTable() {
         // Khởi tạo DefaultTableModel với các cột rỗng và không cho phép chỉnh sửa
         model = new javax.swing.table.DefaultTableModel(
@@ -408,6 +417,7 @@ public class nghiphep extends javax.swing.JFrame {
          // Tải lại dữ liệu sau khi cập nhật/thêm
          loadData();
          JOptionPane.showMessageDialog(this, "Lưu thành công!");
+         clearInputFields();
 
      } catch (SQLException e) {
          JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -449,6 +459,7 @@ public class nghiphep extends javax.swing.JFrame {
         // Tải lại dữ liệu sau khi xóa
         loadData();
         JOptionPane.showMessageDialog(this, "Xóa thành công!");
+        clearInputFields();
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -496,6 +507,7 @@ public class nghiphep extends javax.swing.JFrame {
         // Tải lại dữ liệu sau khi cập nhật/thêm
         loadData();
         JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        clearInputFields();
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -507,7 +519,7 @@ public class nghiphep extends javax.swing.JFrame {
         String keyword = txt_timkiem.getText().trim();
     
     if (keyword.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        loadData();
         return;
     }
     
@@ -565,14 +577,17 @@ public class nghiphep extends javax.swing.JFrame {
             model.addRow(row);
         }
         
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        if (model.getRowCount() > 0) {
+                JOptionPane.showMessageDialog(this, "Kết quả tìm kiếm cho '" + keyword + "':", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                loadData(); // Load lại dữ liệu gốc nếu không tìm thấy kết quả
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
 
-    } catch (SQLException e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm trong cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+        txt_timkiem.setText("");
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
     /**

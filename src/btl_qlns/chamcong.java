@@ -22,6 +22,14 @@ public class chamcong extends javax.swing.JFrame {
     ConnectDB cn = new ConnectDB();
     DefaultTableModel model;
     
+    private void clearInputFields() {
+        txt_mcc.setText("");
+        txt_mnv.setText("");
+        txt_ngay.setText("");
+        txt_vao.setText("");
+        txt_ra.setText("");
+    }
+
     public chamcong() {
         initComponents();
         setupTable();
@@ -400,6 +408,7 @@ public class chamcong extends javax.swing.JFrame {
         if (updated > 0) {
             JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
             loadData(); // Tải lại dữ liệu sau khi cập nhật
+            clearInputFields();
         } else {
             JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu để cập nhật!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
@@ -445,6 +454,7 @@ public class chamcong extends javax.swing.JFrame {
 
          // Tải lại dữ liệu sau khi cập nhật/thêm
          loadData();
+         clearInputFields();
          JOptionPane.showMessageDialog(this, "Lưu thành công!");
 
      } catch (SQLException e) {
@@ -478,6 +488,7 @@ public class chamcong extends javax.swing.JFrame {
         if (deleted > 0) {
             JOptionPane.showMessageDialog(this, "Xóa thành công!");
             loadData(); // Tải lại dữ liệu sau khi xóa
+            clearInputFields();
         } else {
             JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
@@ -500,7 +511,7 @@ public class chamcong extends javax.swing.JFrame {
         String keyword = txt_timkiem.getText().trim();
         // Kiểm tra các trường dữ liệu
         if (keyword.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập tên nhân viên để tìm kiếm !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            loadData();
             return; // Dừng xử lý nếu có trường trống
         }
     if (keyword.isEmpty()) {
@@ -527,7 +538,7 @@ public class chamcong extends javax.swing.JFrame {
             JOIN nhanvien nv ON cc.MaNV = nv.MaNV
             JOIN phongban pb ON nv.MaPB = pb.MaPB
             WHERE nv.HoTen LIKE ? OR nv.MaNV LIKE ? OR pb.TenPB LIKE ? OR cc.MaChamCong LIKE ?
-            """;
+        """;
         pstmt = conn.prepareStatement(query);
         String searchKeyword = "%" + keyword + "%";
         pstmt.setString(1, searchKeyword);
@@ -550,13 +561,18 @@ public class chamcong extends javax.swing.JFrame {
             model.addRow(row);
         }
 
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        if (model.getRowCount() > 0) {
+                JOptionPane.showMessageDialog(this, "Kết quả tìm kiếm cho '" + keyword + "':", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                loadData(); // Load lại dữ liệu gốc nếu không tìm thấy kết quả
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
 
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+        txt_timkiem.setText(""); 
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
     /**

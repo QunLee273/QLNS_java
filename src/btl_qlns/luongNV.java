@@ -4,8 +4,6 @@
  */
 package btl_qlns;
 
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -47,106 +45,106 @@ public class luongNV extends javax.swing.JFrame {
         dsluong.setModel(model);
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    // Retrieve input values from text fields
-    String maLuong = txt_ml.getText();
-    String maNV = txt_mnv.getText();
-    String hoTen = txt_ten.getText();
-    String maPB = txt_pb.getText();
-    double luongCoBan = Double.parseDouble(txt_lcb.getText());
-    double phuCap = Double.parseDouble(txt_pc.getText());
-    double thuong = Double.parseDouble(txt_t.getText());
-    double khauTru = Double.parseDouble(txt_khautru.getText());
-    double tong = luongCoBan + phuCap + thuong - khauTru;
+        // Retrieve input values from text fields
+        String maLuong = txt_ml.getText();
+        String maNV = txt_mnv.getText();
+        String hoTen = txt_ten.getText();
+        String maPB = txt_pb.getText();
+        double luongCoBan = Double.parseDouble(txt_lcb.getText());
+        double phuCap = Double.parseDouble(txt_pc.getText());
+        double thuong = Double.parseDouble(txt_t.getText());
+        double khauTru = Double.parseDouble(txt_khautru.getText());
+        double tong = luongCoBan + phuCap + thuong - khauTru;
 
-    // SQL query strings
-    String insertQuery = "INSERT INTO luong (MaLuong, MaNV, luongCoBan, PhuCap, Thuong, KhauTru) VALUES (?, ?, ?, ?, ?, ?)";
-    String updateQuery = "UPDATE luong SET luongCoBan=?, PhuCap=?, Thuong=?, KhauTru=? WHERE MaLuong=?";
+        // SQL query strings
+        String insertQuery = "INSERT INTO luong (MaLuong, MaNV, luongCoBan, PhuCap, Thuong, KhauTru) VALUES (?, ?, ?, ?, ?, ?)";
+        String updateQuery = "UPDATE luong SET luongCoBan=?, PhuCap=?, Thuong=?, KhauTru=? WHERE MaLuong=?";
 
-    try {
-        java.sql.Connection conn = cn.getConnection(); // Establish connection
+        try {
+            java.sql.Connection conn = cn.getConnection(); // Establish connection
 
-        if (maLuong.isEmpty()) {
-            // Insert new record
-            try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-                pstmt.setString(1, maLuong);
-                pstmt.setString(2, maNV);
-                pstmt.setDouble(3, luongCoBan);
-                pstmt.setDouble(4, phuCap);
-                pstmt.setDouble(5, thuong);
-                pstmt.setDouble(6, khauTru);
-                pstmt.executeUpdate();
+            if (maLuong.isEmpty()) {
+                // Insert new record
+                try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+                    pstmt.setString(1, maLuong);
+                    pstmt.setString(2, maNV);
+                    pstmt.setDouble(3, luongCoBan);
+                    pstmt.setDouble(4, phuCap);
+                    pstmt.setDouble(5, thuong);
+                    pstmt.setDouble(6, khauTru);
+                    pstmt.executeUpdate();
+                }
+            } else {
+                // Update existing record
+                try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+                    pstmt.setDouble(1, luongCoBan);
+                    pstmt.setDouble(2, phuCap);
+                    pstmt.setDouble(3, thuong);
+                    pstmt.setDouble(4, khauTru);
+                    pstmt.setString(5, maLuong);
+                    pstmt.executeUpdate();
+                }
             }
-        } else {
-            // Update existing record
-            try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
-                pstmt.setDouble(1, luongCoBan);
-                pstmt.setDouble(2, phuCap);
-                pstmt.setDouble(3, thuong);
-                pstmt.setDouble(4, khauTru);
-                pstmt.setString(5, maLuong);
-                pstmt.executeUpdate();
-            }
+
+            // Reload data after update/insert
+            loadData();
+            JOptionPane.showMessageDialog(this, "Lưu thành công!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Reload data after update/insert
-        loadData();
-        JOptionPane.showMessageDialog(this, "Lưu thành công!");
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Lỗi khi lưu vào cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
-}
 
     private void loadData() {
         
-    // Xóa dữ liệu hiện có trong bảng
-    DefaultTableModel model = (DefaultTableModel) dsluong.getModel();
-    model.setRowCount(0);
-
-    // Thực hiện truy vấn lấy dữ liệu từ cơ sở dữ liệu
-    java.sql.Connection conn = null;
-    java.sql.Statement stmt = null;
-    ResultSet rs = null;
-
-    
-    try {
-        // Kết nối tới cơ sở dữ liệu
-        conn = cn.getConnection();
-        
-        // Thực hiện truy vấn SQL
-        stmt = conn.createStatement();
-        String query = """
-                       SELECT luong.*, phongban.TenPB, nhanvien.HoTen
-                       FROM luong
-                       LEFT JOIN nhanvien ON luong.MaNV = nhanvien.MaNV
-                       LEFT JOIN phongban ON nhanvien.MaPB = phongban.MaPB;
-                       """;
-        rs = stmt.executeQuery(query);
-
-        // Xóa dữ liệu cũ trong bảng
+        // Xóa dữ liệu hiện có trong bảng
+        DefaultTableModel model = (DefaultTableModel) dsluong.getModel();
         model.setRowCount(0);
 
-        // Lặp qua kết quả truy vấn và thêm vào mô hình bảng
-        while (rs.next()) {
-            Object[] row = new Object[9];
-            row[0] = rs.getString("MaLuong");
-            row[1] = rs.getString("MaNV");
-            row[2] = rs.getString("HoTen");
-            row[3] = rs.getString("TenPB");
-            row[4] = rs.getDouble("luongCoBan");
-            row[5] = rs.getDouble("PhuCap");
-            row[6] = rs.getDouble("Thuong");
-            row[7] = rs.getDouble("KhauTru");
-            row[8] =  rs.getDouble("luongCoBan") + rs.getDouble("PhuCap") + rs.getDouble("Thuong") - rs.getDouble("KhauTru");
-            model.addRow(row);
-            
-        }
-    } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi lấy dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-}
+        // Thực hiện truy vấn lấy dữ liệu từ cơ sở dữ liệu
+        java.sql.Connection conn = null;
+        java.sql.Statement stmt = null;
+        ResultSet rs = null;
+
+
+        try {
+            // Kết nối tới cơ sở dữ liệu
+            conn = cn.getConnection();
+
+            // Thực hiện truy vấn SQL
+            stmt = conn.createStatement();
+            String query = """
+                           SELECT luong.*, phongban.TenPB, nhanvien.HoTen
+                           FROM luong
+                           LEFT JOIN nhanvien ON luong.MaNV = nhanvien.MaNV
+                           LEFT JOIN phongban ON nhanvien.MaPB = phongban.MaPB;
+                           """;
+            rs = stmt.executeQuery(query);
+
+            // Xóa dữ liệu cũ trong bảng
+            model.setRowCount(0);
+
+            // Lặp qua kết quả truy vấn và thêm vào mô hình bảng
+            while (rs.next()) {
+                Object[] row = new Object[9];
+                row[0] = rs.getString("MaLuong");
+                row[1] = rs.getString("MaNV");
+                row[2] = rs.getString("HoTen");
+                row[3] = rs.getString("TenPB");
+                row[4] = rs.getDouble("luongCoBan");
+                row[5] = rs.getDouble("PhuCap");
+                row[6] = rs.getDouble("Thuong");
+                row[7] = rs.getDouble("KhauTru");
+                row[8] =  rs.getDouble("luongCoBan") + rs.getDouble("PhuCap") + rs.getDouble("Thuong") - rs.getDouble("KhauTru");
+                model.addRow(row);
+
+            }
+        } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi khi lấy dữ liệu từ cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

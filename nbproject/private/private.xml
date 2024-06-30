@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/MainF.java</file>
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/qlHopDong.java</file>
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/luongNV.java</file>
@@ -11,6 +12,28 @@
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/ThongTinForm.java</file>
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/nghiphep.java</file>
             <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/thongtinNV.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/ThongTinForm.java</file>
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/thongtinNV.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/dnForm.java</file>
+            <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/MainF.java</file>
+            <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/qlHopDong.java</file>
+            <file>file:/E:/javacode/BTL_QLNS/src/btl_qlns/luongNV.java</file>
+=======
+>>>>>>> 56739d571a4c5e1614f900de69eaf1137a26da2b
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/luongNV.java</file>
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/chamcong.java</file>
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/dnForm.java</file>
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/nghiphep.java</file>
+<<<<<<< HEAD
+            <file>file:/D:/hoc%20tap/java/QLNS_java/src/btl_qlns/dkForm.java</file>
+=======
+>>>>>>> 479bea5c371ce87d57a3c2256d2dc2ff43f23fe3
+>>>>>>> 56739d571a4c5e1614f900de69eaf1137a26da2b
+>>>>>>> 07c05147373cafa72c224ff3047070add1ceba0a
         </group>
     </open-files>
 </project-private>

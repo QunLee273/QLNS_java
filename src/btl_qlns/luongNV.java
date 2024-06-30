@@ -532,13 +532,28 @@ public class luongNV extends javax.swing.JFrame {
         // Lấy giá trị đầu vào từ các ô nhập liệu
         String maLuong = txt_ml.getText();
         String maNV = txt_mnv.getText();
+        String luongCoBanStr = txt_lcb.getText();
+        String phuCapStr = txt_pc.getText();
+        String thuongStr = txt_t.getText();
+        String khauTruStr = txt_khautru.getText();
+        
+     
+        // Kiểm tra các trường dữ liệu
+        if (maLuong.isEmpty() || maNV.isEmpty() || luongCoBanStr.isEmpty() || phuCapStr.isEmpty() || thuongStr.isEmpty() || khauTruStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
+
+        // Kiểm tra định dạng số (chỉ cho phép số và dấu chấm)
+        if (!luongCoBanStr.matches("\\d+\\.?\\d*") || !phuCapStr.matches("\\d+\\.?\\d*") || !thuongStr.matches("\\d+\\.?\\d*") || !khauTruStr.matches("\\d+\\.?\\d*")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu định dạng số không hợp lệ
+        }
         double luongCoBan = Double.parseDouble(txt_lcb.getText());
         double phuCap = Double.parseDouble(txt_pc.getText());
         double thuong = Double.parseDouble(txt_t.getText());
         double khauTru = Double.parseDouble(txt_khautru.getText());
         double tong = luongCoBan + phuCap + thuong - khauTru;
-     
-     
 
      // Chuỗi câu truy vấn SQL
      String insertQuery = "INSERT INTO luong (MaLuong, MaNV, luongCoBan, PhuCap, Thuong, KhauTru) VALUES (?, ?, ?, ?, ?, ?)";
@@ -571,15 +586,30 @@ public class luongNV extends javax.swing.JFrame {
 
     private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
         // Lấy giá trị đầu vào từ các ô nhập liệu
-    String maLuong = txt_ml.getText();
-    String maNV = txt_mnv.getText();
-    String hoTen = txt_ten.getText();
-    String maPB = txt_pb.getText();
-    double luongCoBan = Double.parseDouble(txt_lcb.getText());
-    double phuCap = Double.parseDouble(txt_pc.getText());
-    double thuong = Double.parseDouble(txt_t.getText());
-    double khauTru = Double.parseDouble(txt_khautru.getText());
-    double tong = luongCoBan + phuCap + thuong - khauTru;
+        String maLuong = txt_ml.getText();
+        String maNV = txt_mnv.getText();
+        String luongCoBanStr = txt_lcb.getText();
+        String phuCapStr = txt_pc.getText();
+        String thuongStr = txt_t.getText();
+        String khauTruStr = txt_khautru.getText();
+        
+     
+        // Kiểm tra các trường dữ liệu
+        if (maLuong.isEmpty() || maNV.isEmpty() || luongCoBanStr.isEmpty() || phuCapStr.isEmpty() || thuongStr.isEmpty() || khauTruStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
+
+        // Kiểm tra định dạng số (chỉ cho phép số và dấu chấm)
+        if (!luongCoBanStr.matches("\\d+\\.?\\d*") || !phuCapStr.matches("\\d+\\.?\\d*") || !thuongStr.matches("\\d+\\.?\\d*") || !khauTruStr.matches("\\d+\\.?\\d*")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu định dạng số không hợp lệ
+        }
+        double luongCoBan = Double.parseDouble(txt_lcb.getText());
+        double phuCap = Double.parseDouble(txt_pc.getText());
+        double thuong = Double.parseDouble(txt_t.getText());
+        double khauTru = Double.parseDouble(txt_khautru.getText());
+        double tong = luongCoBan + phuCap + thuong - khauTru;
 
     // Chuỗi câu truy vấn SQL
     
@@ -614,6 +644,13 @@ public class luongNV extends javax.swing.JFrame {
         // TODO add your handling code here:
         // Lấy mã lương từ ô nhập liệu
         String maLuong = txt_ml.getText();
+        // Kiểm tra các trường dữ liệu
+        if (maLuong.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
+
+        
 
         // Chuỗi câu truy vấn SQL
         String deleteQuery = "DELETE FROM luong WHERE MaLuong = ?";

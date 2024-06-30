@@ -374,7 +374,13 @@ public class nghiphep extends javax.swing.JFrame {
         String ngayBatDau = txt_nbd.getText();
         String ngayKetThuc = txt_nkt.getText();
         String lyDo = txt_ld.getText();
-        String trangThai = txt_tt.getText();    
+        String trangThai = txt_tt.getText();
+
+        // Kiểm tra các trường dữ liệu
+        if (maNghiPhep.isEmpty() || maNV.isEmpty() || loaiNghiPhep.isEmpty() || ngayBatDau.isEmpty() || ngayKetThuc.isEmpty() || lyDo.isEmpty() || trangThai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }  
      
      
 
@@ -412,6 +418,12 @@ public class nghiphep extends javax.swing.JFrame {
          // Lấy giá trị đầu vào từ các ô nhập liệu
     String maNghiPhep = txt_manp.getText();
 
+        // Kiểm tra các trường dữ liệu
+        if (maNghiPhep.isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập thông tin để tìm kiếm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
+
     // Chuỗi câu truy vấn SQL
     String deleteQuery = "DELETE FROM nghiphep WHERE MaNghiPhep = ?";
 
@@ -448,12 +460,18 @@ public class nghiphep extends javax.swing.JFrame {
         // TODO add your handling code here:
         // Lấy giá trị đầu vào từ các ô nhập liệu
     String maNghiPhep = txt_manp.getText();
-    String maNV = txt_mnv.getText();
-    String loaiNghiPhep = txt_lnp.getText();
-    String ngayBatDau = txt_nbd.getText();
-    String ngayKetThuc = txt_nkt.getText();
-    String lyDo = txt_ld.getText();
-    String trangThai = txt_tt.getText();
+        String maNV = txt_mnv.getText();
+        String loaiNghiPhep = txt_lnp.getText();
+        String ngayBatDau = txt_nbd.getText();
+        String ngayKetThuc = txt_nkt.getText();
+        String lyDo = txt_ld.getText();
+        String trangThai = txt_tt.getText();
+
+        // Kiểm tra các trường dữ liệu
+        if (maNghiPhep.isEmpty() || maNV.isEmpty() || loaiNghiPhep.isEmpty() || ngayBatDau.isEmpty() || ngayKetThuc.isEmpty() || lyDo.isEmpty() || trangThai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
 
     // Chuỗi câu truy vấn SQL
     String updateQuery = "UPDATE nghiphep SET MaNV = ?, LoaiNghiPhep = ?, NgayBatDau = ?, NgayKetThuc = ?, LyDo = ?, TrangThai = ? " +

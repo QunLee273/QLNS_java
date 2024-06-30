@@ -377,6 +377,11 @@ public class chamcong extends javax.swing.JFrame {
     String ngay = txt_ngay.getText();
     String vao = txt_vao.getText();
     String ra = txt_ra.getText();
+    // Kiểm tra các trường dữ liệu
+        if (machamcong.isEmpty() || manv.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
     
     String updateQuery = "UPDATE chamcong SET MaNV=?, Ngay=?, GioVao=?, GioRa=? WHERE MaChamCong=?";
     
@@ -412,6 +417,11 @@ public class chamcong extends javax.swing.JFrame {
      String vao = txt_vao.getText();
      String ra = txt_ra.getText();
      
+     // Kiểm tra các trường dữ liệu
+        if (machamcong.isEmpty() || maNV.isEmpty() || ngay.isEmpty() || vao.isEmpty() || ra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
      
 
      // Chuỗi câu truy vấn SQL
@@ -449,6 +459,11 @@ public class chamcong extends javax.swing.JFrame {
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         String machamcong = txt_mcc.getText();
+        // Kiểm tra các trường dữ liệu
+        if (machamcong.isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
     
     String deleteQuery = "DELETE FROM chamcong WHERE MaChamCong=?";
     
@@ -483,6 +498,11 @@ public class chamcong extends javax.swing.JFrame {
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
         // TODO add your handling code here:
         String keyword = txt_timkiem.getText().trim();
+        // Kiểm tra các trường dữ liệu
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập tên nhân viên để tìm kiếm !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng xử lý nếu có trường trống
+        }
     if (keyword.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         return;
